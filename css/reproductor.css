@@ -97,3 +97,23 @@ video {
     -moz-box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 20px 0px rgba(0,0,0,0.75);
 }
+
+.sonor {
+    transition: 0.5s ease-out;
+}
+
+.sonor:hover {
+    animation-name: zoom;
+    animation-duration: 0.5s;
+    animation-direction: alternate;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(1.0) rotate(5deg);
+    }
+
+    to {
+        transform: scale(1.1) rotate(-5deg);
+    }
+}

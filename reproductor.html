@@ -6,15 +6,19 @@
     <link href="css/reproductor.css" rel="stylesheet" type="text/css"/>
     <link href="https://fonts.googleapis.com/css?family=Sigmar+One" rel="stylesheet" type="text/css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="//code.jquery.com/jquery-2.2.2.min.js"></script>
+    <script src="js/reproductor.js"></script>
+
 </head>
 <body>
 <main>
     <div id="llista">
         <h1>Vídeos</h1>
         <ul>
-            <li>Vídeo 1</li>
-            <li>Vídeo 2</li>
-            <li>Vídeo 3</li>
+            <li class="sonor">Vídeo 1</li>
+            <li class="sonor">Vídeo 2</li>
+            <li class="sonor">Vídeo 3</li>
         </ul>
     </div>
     <div id="visor">
@@ -23,10 +27,10 @@
             <video width="430px" height="315px"></video>
         </div>
         <div id="controls">
-            <div class="boto"><i class="fa fa-step-backward fa-3x"></i><br>ANTERIOR</div>
-            <div class="boto"><i class="fa fa-play fa-3x "></i><br>REPRODUIR</div>
-            <div class="boto"><i class="fa fa-pause fa-3x"></i><br>ATURAR</div>
-            <div class="boto"><i class="fa fa-step-forward fa-3x"></i><br>SEGÜENT</div>
+            <div class="boto sonor"><i class="fa fa-step-backward fa-3x"></i><br>ANTERIOR</div>
+            <div class="boto sonor"><i class="fa fa-play fa-3x "></i><br>REPRODUIR</div>
+            <div class="boto sonor"><i class="fa fa-pause fa-3x"></i><br>ATURAR</div>
+            <div class="boto sonor"><i class="fa fa-step-forward fa-3x"></i><br>SEGÜENT</div>
         </div>
     </div>
     <div class="clearfix"></div>
