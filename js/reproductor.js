@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+    inicialitzarLlistaVideos();
+
     inicialitzarSoundPool('a_sobra', 'assets/audio/a-sobra.mp3')
 
     $('.sonor').on('mouseenter', function () {
@@ -16,7 +18,25 @@ $(document).ready(function () {
 });
 
 var soundPool = {},
-    MAX_SOUNDS = 10;
+    MAX_SOUNDS = 10,
+    videos = [
+        {
+            titol: 'El primer video',
+            descripcio: 'Aquesta es la descripció del primer video',
+            url: 'assets/video/video-1.mov'
+        },
+        {
+            titol: 'El segon video',
+            descripcio: 'Aquesta es la descripció del segon video',
+            url: 'assets/video/video-2.mov'
+        },
+        {
+            titol: 'El tercer video',
+            descripcio: 'Aquesta es la descripció del tercer video',
+            url: 'assets/video/video-3.mov'
+        }
+    ],
+    seleccionat = -1;
 
 function inicialitzarSoundPool(nom, url) {
     soundPool[nom] = {
@@ -33,4 +53,38 @@ function reproduirSo(nom) {
     var index = soundPool[nom].actual;
     soundPool[nom].sons[index % MAX_SOUNDS].play();
     soundPool[nom].actual++;
+}
+
+function inicialitzarLlistaVideos() {
+    $.each(videos, function (index, value) {
+        // Creem un nou node de tipus LI fent servir jQuery
+        var $node = $('<li></li>');
+
+        // Afegim la classe sonor
+        $node.addClass('sonor');
+
+        // Afegim un identificador únic basat en el seu index
+        $node.attr('id', 'video-'+index);
+
+        // Afegim el contingut del element
+        $node.text(value.titol);
+
+        // Afegim la descripció per mostrar quan deixem el cursor a sobre uns egons
+        $node.attr('title', value.descripcio);
+
+        // Afegim el node a la llista de vídeos
+        $('#videos').append($node);
+
+        // Afegim la detecció del esdeveniment click per establir aquest vídeo com el seleccionat i iniciar la reproducció
+        $node.on('click', function() {
+            seleccionat = index;
+            reproduirVideo();
+        })
+    });
+}
+
+function reproduirVideo() {
+    var video = videos[seleccionat];
+    $('video').attr('src', video.url);
+    $('video').get(0).play();
 }
