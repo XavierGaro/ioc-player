@@ -15,6 +15,17 @@ $(document).ready(function () {
         reproduirSo('selecciona');
     });
 
+    $('#anterior').click(anteriorVideo);
+    $('#reproduir').click(reproduirVideo);
+    $('#aturar').click(aturarVideo);
+    $('#seguent').click(seguentVideo);
+
+    $(document).keypress(function(evt) {
+        if (evt.charCode==32) {
+            aturarVideo();
+        }
+    });
+
 });
 
 var soundPool = {},
@@ -36,7 +47,7 @@ var soundPool = {},
             url: 'assets/video/video-3.mov'
         }
     ],
-    seleccionat = -1;
+    seleccionat = 0;
 
 function inicialitzarSoundPool(nom, url) {
     soundPool[nom] = {
@@ -64,7 +75,7 @@ function inicialitzarLlistaVideos() {
         $node.addClass('sonor');
 
         // Afegim un identificador únic basat en el seu index
-        $node.attr('id', 'video-'+index);
+        $node.attr('id', 'video-' + index);
 
         // Afegim el contingut del element
         $node.text(value.titol);
@@ -76,7 +87,7 @@ function inicialitzarLlistaVideos() {
         $('#videos').append($node);
 
         // Afegim la detecció del esdeveniment click per establir aquest vídeo com el seleccionat i iniciar la reproducció
-        $node.on('click', function() {
+        $node.on('click', function () {
             seleccionat = index;
             reproduirVideo();
         })
@@ -87,4 +98,30 @@ function reproduirVideo() {
     var video = videos[seleccionat];
     $('video').attr('src', video.url);
     $('video').get(0).play();
+}
+
+function aturarVideo() {
+    var video = $('video').get(0);
+
+    if (video.paused) {
+        video.play();
+    } else {
+        video.pause();
+    }
+}
+
+function anteriorVideo() {
+    seleccionat--;
+    if (seleccionat < 0) {
+        seleccionat = videos.length - 1;
+    }
+    reproduirVideo();
+}
+
+function seguentVideo() {
+    seleccionat++;
+    if (seleccionat === videos.length) {
+        seleccionat = 0;
+    }
+    reproduirVideo();
 }
